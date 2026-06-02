@@ -20,9 +20,11 @@ const userModel = new mongoose.Schema({
     },
     gender:{
         type:String,
-        enum:["male","female"],
+        enum:["male","female","other","prefer_not_to_say"],
         required:true
-    }
-})
+    },
 
-export const User = mongoose.model("User", userModel)
+},{timestamps:true});
+
+const User = mongoose.model("User", userModel);
+export default User;
