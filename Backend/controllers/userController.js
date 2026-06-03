@@ -23,15 +23,18 @@ export const register = async(req,res)=>{
             });
         }
         const hashedPassword = await bcrypt.hash(password,10 )
-
+        
+        const maleProfilePhoto = `https://api.dicebear.com/10.x/adventurer/svg`;
+        const femaleProfilePhoto = `https://api.dicebear.com/10.x/adventurer/svg`;
+        
         await User.create({
             fullName,
             username,
             password,
-            profilePhoto,
+            profilePhoto : gender === male ? maleProfilePhoto : femaleProfilePhoto,
             gender
         })
     }catch(error){
-
+        console.log(error);
     }
 }
