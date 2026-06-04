@@ -30,9 +30,14 @@ export const register = async(req,res)=>{
         await User.create({
             fullName,
             username,
-            password,
-            profilePhoto : gender === male ? maleProfilePhoto : femaleProfilePhoto,
+            password:hashedPassword,
+            profilePhoto : gender === "male" ? maleProfilePhoto : femaleProfilePhoto,
             gender
+        })
+
+        return res.status(201).json({
+            success:true,
+            message:"User registered successfully"
         })
     }catch(error){
         console.log(error);
