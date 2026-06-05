@@ -47,7 +47,8 @@ export const register = async(req,res)=>{
 };
 export const login = async(req,res)=>{
     try{
-        const {username, password} = req.body;
+        console.log("req.body =", req.body);
+        const {username, password} = req.body || {};
         if(!username || !password){
             return res.status(400).send({
                 message:"All fields are required"
@@ -65,7 +66,7 @@ export const login = async(req,res)=>{
         if(!isPasswordMatch){
             return res.status(400).json({
                 message:"Incorrect username or password",
-                success:flase
+                success:false
             })
         };
 
@@ -78,7 +79,7 @@ export const login = async(req,res)=>{
         return res.status(200).cookie("token",token, {maxAge:1*24*60*60*1000, httpOnly:true, sameSite:'strict'}).send({
             _id:user._id,
             username: user.username,
-            fullname: user.username,
+            fullname: user.fullname,
             profilePhoto: user.profilePhoto 
         });
         

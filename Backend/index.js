@@ -12,6 +12,7 @@ const router = express.Router();
 const PORT = process.env.PORT || 8080;
 //middleware
 app.use(express.json());
+app.use(express.urlencoded({extended:true}));
 
 
 app.use("/api/v1/user",userRouter)
@@ -19,8 +20,10 @@ app.get("/",(req,res)=>{
     res.send("Backend is running");
 })
 
-connectDB().then(()=>{
-    app.listen(PORT,()=>{
-        console.log(`Server is listening on PORT ${PORT}`)
-    })
-})
+const start = async () => {
+    await connectDB();
+    app.listen(PORT, () => {
+        console.log(`Server is listening on PORT ${PORT}`);
+    });
+};
+start();
