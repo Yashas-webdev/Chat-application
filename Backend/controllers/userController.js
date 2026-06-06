@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken"
 
 export const register = async(req,res)=>{
     try{
-        const {fullName, username, password, confirmPassword, gender}= req.body;
+        const {fullName, username, password, confirmPassword, gender}= req.body || {};
         if(!fullName || !username || !password || !confirmPassword || !gender){
             return res.status(400).send({
                 message:"All fields are required"
@@ -25,8 +25,8 @@ export const register = async(req,res)=>{
         }
         const hashedPassword = await bcrypt.hash(password,10 )
         
-        const maleProfilePhoto = `https://api.dicebear.com/10.x/adventurer/svg`;
-        const femaleProfilePhoto = `https://api.dicebear.com/10.x/adventurer/svg`;
+        const maleProfilePhoto = `https://api.dicebear.com/10.x/adventurer/svg?seed=${username}`;
+        const femaleProfilePhoto = `https://api.dicebear.com/10.x/lorelei/svg?seed=${username}`;
         
         await User.create({
             fullName,
@@ -39,7 +39,6 @@ export const register = async(req,res)=>{
         return res.status(201).json({
             success:true,
             message:"User registered successfully",
-            success:true
         })
     }catch(error){
         console.log(error);
@@ -79,7 +78,7 @@ export const login = async(req,res)=>{
         return res.status(200).cookie("token",token, {maxAge:1*24*60*60*1000, httpOnly:true, sameSite:'strict'}).send({
             _id:user._id,
             username: user.username,
-            fullName: user.fullname,
+            fullName: user.fullName,
             profilePhoto: user.profilePhoto 
         });
         
@@ -90,10 +89,24 @@ export const login = async(req,res)=>{
 
 export const logout = (req,res)=>{
     try{
-        return res.status(200).cookie('token',"",{maxAge:0}).send({
+        return res.status(200).cookie('token',"",{maxAge:0}).send({   //we can also use clearCookie('token').send
             message:"logged out successfully."
         })
     }catch(error){
         console.log(error);
+        return res.status(500).send({
+            message:"Internal server error",
+            success:false
+        })
+    }
+}
+
+export const getOtherUsers = async(req,res)=>{
+    try{
+        const loggedInUserId = req.id;
+        const otherUsers = await User.find({_id:{$ne:loggedInUserId}}).select("-password");
+        return res.status(200).json(otherUsers);
+    }catch(error){
+        console.log(error)
     }
 }
