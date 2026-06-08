@@ -1,26 +1,26 @@
 export const sendMessage = async(req,res)=>{
     try{
         const senderId = req.id;
-        const recieverId = req.params.id;
+        const receiverId = req.params.id;
         const {message} = req.body;
 
-        let getConversation = await Conversation.findOne({
+        let gotConversation = await Conversation.findOne({
             participants:{$all:[senderId,recieverId]},
         });
 
         if(!gotConversation){
             gotConversation = await Conversation.create({
-                participants:[senderId,recieverId]
+                participants:[senderId,receiverId]
             })
         };
 
         const newMessage = await Message.create({
             senderId,
-            recieverId,
+            receiverId,
             message
         });
         if(newMessage){
-            gotConversation.message.push(newMessage._id);
+            gotConversation.messages.push(newMessage._id);
         };
         await gotConversation.save();
     }catch(error){
