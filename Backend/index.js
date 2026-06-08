@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 dotenv.config({});
 import connectDB from "./config/database.js";
 import userRouter from "./routes/userRoute.js";
+import messageRoute from "./routes/messageRoute.js"
 import cookieParser from "cookie-parser";
 
 
@@ -21,6 +22,7 @@ app.use("/api/v1/user",userRouter)
 app.get("/",(req,res)=>{
     res.send("Backend is running");
 })
+app.use("api/v1/message",messageRoute);
 
 const start = async () => {
     await connectDB();
