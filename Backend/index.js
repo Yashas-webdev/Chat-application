@@ -22,7 +22,7 @@ app.use("/api/v1/user",userRouter)
 app.get("/",(req,res)=>{
     res.send("Backend is running");
 })
-app.use("api/v1/message",messageRoute);
+app.use("/api/v1/message",messageRoute);
 
 const start = async () => {
     await connectDB();

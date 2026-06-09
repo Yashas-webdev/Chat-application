@@ -8,7 +8,7 @@ export const sendMessage = async(req,res)=>{
         const {message} = req.body;
 
         let gotConversation = await Conversation.findOne({
-            participants:{$all:[senderId,recieverId]},
+            participants:{$all:[senderId,receiverId]},
         });
 
         if(!gotConversation){
@@ -26,6 +26,10 @@ export const sendMessage = async(req,res)=>{
             gotConversation.messages.push(newMessage._id);
         };
         await gotConversation.save();
+
+        return res.status(201).send({
+            message:"Message send successfully"
+        })
     }catch(error){
         console.log(error);
     }
