@@ -59,6 +59,19 @@ const Signup = () => {
              text-white
              placeholder-gray-300'/>
             </div>
+
+            <div className='flex items-center my-4'>
+              <div className='flex items-center'>
+                <p>Male</p>
+              <input type="checkbox" defaultChecked className="checkbox mx-2" />
+              </div>
+
+              <div className='flex items-center'>
+                <p>Female</p>
+              <input type="checkbox" defaultChecked className="checkbox mx-2" />
+              </div>
+            </div>   
+            
           </form>
         </div>
     </div>
