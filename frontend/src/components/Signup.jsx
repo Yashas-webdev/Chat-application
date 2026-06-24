@@ -16,7 +16,7 @@ const Signup = () => {
               <label className='label p-2'>
                 <span className='label-text'>Full Name</span>
               </label>
-              <input type='text' placeholder='User' className='input w-full
+              <input type='text' placeholder='Full Name' className='input w-full
              bg-white/10
              backdrop-blur-md
              border-white/20
