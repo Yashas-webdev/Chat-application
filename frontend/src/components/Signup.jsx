@@ -1,7 +1,31 @@
-import React from "react";
+import React,{useState} from "react";
 import { Link } from "react-router-dom";
 
 const Signup = () => {
+  const [user, setUser] = useState({
+    fullName: "",
+    username: "",
+    password: "",
+    confirmpassword: "",
+    gender: "",
+  });
+
+  const handleCheckbox = (gender) =>{
+    setUser({...user,gender})
+  }
+
+  const onSubmitHandler = (e) =>{
+    e.preventDefault();
+    console.log(user);
+    setUser({
+       fullName: "",
+       username: "",
+       password: "",
+       confirmpassword: "",
+       gender: "",
+    })
+  }
+
   return (
     <>
       <div className="flex justify-center items-center min-h-screen">
@@ -14,12 +38,14 @@ const Signup = () => {
         >
           <h1 className="text-3xl font-bold text-center">SignUp</h1>
 
-          <form action="">
+          <form onSubmit={onSubmitHandler} action="">
             <div className="mt-4">
               <label className="label p-2">
                 <span className="label-text">Full Name</span>
               </label>
               <input
+                value={user.fullName}
+                onChange={(e)=>setUser({...user,fullName:e.target.value})}
                 type="text"
                 placeholder="Full Name"
                 className="input w-full
@@ -36,6 +62,8 @@ const Signup = () => {
                 <span className="label-text">User name</span>
               </label>
               <input
+                value={user.username}
+                onChange={(e)=>setUser({...user,username:e.target.value})}
                 type="text"
                 placeholder="username"
                 className="input w-full
@@ -52,6 +80,8 @@ const Signup = () => {
                 <span className="label-text">Password</span>
               </label>
               <input
+                value={user.password}
+                onChange={(e)=>setUser({...user,password:e.target.value})}
                 type="password"
                 placeholder="*******"
                 className="input w-full
@@ -68,6 +98,8 @@ const Signup = () => {
                 <span className="label-text">Confirm Password</span>
               </label>
               <input
+                value={user.confirmpassword}
+                onChange={(e)=>setUser({...user,confirmpassword:e.target.value})}
                 type="password"
                 placeholder="*******"
                 className="input w-full
@@ -83,8 +115,10 @@ const Signup = () => {
               <div className="flex items-center">
                 <p>Male</p>
                 <input
+                  value={user.gender}
+                  checked={user.gender === "male"}
+                  onChange={() => handleCheckbox("male")}
                   type="checkbox"
-                  defaultChecked
                   className="checkbox mx-2"
                 />
               </div>
@@ -92,19 +126,26 @@ const Signup = () => {
               <div className="flex items-center">
                 <p>Female</p>
                 <input
+                  value={user.gender}
+                  checked={user.gender === "female"}
+                  onChange={() => handleCheckbox("female")}
                   type="checkbox"
-                  defaultChecked
                   className="checkbox mx-2"
-                />
+                /> 
               </div>
             </div>
 
-            <p className="mt-2 text-center">Already have an account?
-            <Link to="/login" className="ml-1 text-blue-500 hover:underline">Login</Link>
+            <p className="mt-2 text-center">
+              Already have an account?
+              <Link to="/login" className="ml-1 text-blue-500 hover:underline">
+                Login
+              </Link>
             </p>
-            
+
             <div className="mt-2">
-             <button className="input w-full
+              <button
+                type="submit"
+                className="btn w-full
              bg-white/10
              hover:bg-white/20
              hover:shadow-lg hover:shadow-white/10
@@ -114,9 +155,10 @@ const Signup = () => {
              placeholder-gray-300
              flex justify-center items-center
              cursor-pointer
-             py-1 rounded-md">
-              SignUp
-             </button>
+             py-1 rounded-md"
+              >
+                SignUp
+              </button>
             </div>
           </form>
         </div>
