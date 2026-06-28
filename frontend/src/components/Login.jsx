@@ -1,7 +1,20 @@
-import React from "react";
+import React , {useState} from "react";
 import { Link } from "react-router-dom";
 
 const Login = () => {
+  const [user, setUser] = useState({
+      username: "",
+      password: "",
+    });
+  
+    const onSubmitHandler = (e) =>{
+      e.preventDefault();
+      console.log(user);
+      setUser({
+         username: "",
+         password: "",
+      })
+    }
   return (
     <>
       <div className="flex justify-center items-center min-h-screen">
@@ -14,13 +27,15 @@ const Login = () => {
         >
           <h1 className="text-3xl font-bold text-center">Login</h1>
 
-          <form action="">
+          <form onSubmit={onSubmitHandler} action="">
 
             <div className="mt-4">
               <label className="label p-2">
                 <span className="label-text">User name</span>
               </label>
               <input
+                value={user.username}
+                onChange={(e)=>setUser({...user,username:e.target.value})}
                 type="text"
                 placeholder="username"
                 className="input w-full
@@ -37,6 +52,8 @@ const Login = () => {
                 <span className="label-text">Password</span>
               </label>
               <input
+                value={user.password}
+                                onChange={(e)=>setUser({...user,password:e.target.value})}
                 type="password"
                 placeholder="*******"
                 className="input w-full
@@ -54,7 +71,7 @@ const Login = () => {
             </p>
             
             <div className="mt-2">
-             <button className="input w-full
+             <button className="btn w-full
              bg-white/10
              hover:bg-white/20
              hover:shadow-lg hover:shadow-white/10
