@@ -99,11 +99,15 @@ const Signup = () => {
               </div>
             </div>
 
-            <Link to="/login">Already have an account?</Link>
-
+            <p className="text-center">Already have an account?
+            <Link to="/login">Login</Link>
+            </p>
+            
             <div className="mt-2">
              <button className="input w-full
              bg-white/10
+             hover:bg-white/20
+             hover:shadow-lg hover:shadow-white/10
              backdrop-blur-md
              border-white/10
              text-white
