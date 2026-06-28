@@ -53,7 +53,7 @@ const Login = () => {
               </label>
               <input
                 value={user.password}
-                                onChange={(e)=>setUser({...user,password:e.target.value})}
+                 onChange={(e)=>setUser({...user,password:e.target.value})}
                 type="password"
                 placeholder="*******"
                 className="input w-full
@@ -71,7 +71,9 @@ const Login = () => {
             </p>
             
             <div className="mt-2">
-             <button className="btn w-full
+             <button 
+             type="submit"
+             className="btn w-full
              bg-white/10
              hover:bg-white/20
              hover:shadow-lg hover:shadow-white/10

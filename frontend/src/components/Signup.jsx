@@ -1,27 +1,45 @@
 import React,{useState} from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import toast from "react-hot-toast"
+
 
 const Signup = () => {
   const [user, setUser] = useState({
     fullName: "",
     username: "",
     password: "",
-    confirmpassword: "",
+    confirmPassword: "",
     gender: "",
   });
-
+  const navigate = useNavigate();
   const handleCheckbox = (gender) =>{
     setUser({...user,gender})
   }
 
-  const onSubmitHandler = (e) =>{
+  const onSubmitHandler = async(e) =>{
     e.preventDefault();
-    console.log(user);
+    try{
+      const res = await axios.post(`http://localhost:8080/api/v1/user/register`,user,{
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        withCredentials: true
+      });
+      if(res.data.success){
+        navigate('/login')
+        toast.success(res.data.message);
+
+      }
+
+    } catch(error){
+      console.log(error);
+    }
     setUser({
        fullName: "",
        username: "",
        password: "",
-       confirmpassword: "",
+       confirmPassword: "",
        gender: "",
     })
   }
@@ -98,8 +116,8 @@ const Signup = () => {
                 <span className="label-text">Confirm Password</span>
               </label>
               <input
-                value={user.confirmpassword}
-                onChange={(e)=>setUser({...user,confirmpassword:e.target.value})}
+                value={user.confirmPassword}
+                onChange={(e)=>setUser({...user,confirmPassword:e.target.value})}
                 type="password"
                 placeholder="*******"
                 className="input w-full
