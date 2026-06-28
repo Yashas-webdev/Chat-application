@@ -99,8 +99,8 @@ const Signup = () => {
               </div>
             </div>
 
-            <p className="text-center">Already have an account?
-            <Link to="/login">Login</Link>
+            <p className="mt-2 text-center">Already have an account?
+            <Link to="/login" className="ml-1 text-blue-500 hover:underline">Login</Link>
             </p>
             
             <div className="mt-2">
