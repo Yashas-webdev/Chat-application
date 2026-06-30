@@ -11,7 +11,7 @@ function Sidebar() {
           type="text"
           placeholder="Search..."
         />
-        <button type="submit" className="btn bg-zinc-700 hover:bg-zinc-400 text-white">
+        <button type="submit" className="btn bg-zinc-700 hover:bg-zinc-500 text-white border-amber-50">
           <BiSearchAlt2 className="w-6 h-6 outline-none" />
         </button>
       </form>
