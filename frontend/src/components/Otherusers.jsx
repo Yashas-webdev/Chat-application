@@ -1,22 +1,18 @@
 import React from 'react'
+import Otheruser from './Otheruser'
 
 function Otherusers() {
   return (
-    <div>
-        <div className='flex gap-3 items-center hover:bg-zinc-300 rounded p-2 cursor-pointer'>
-                <div className='avatar online'>
-                    <div className='w-10 rounded-full'>
-                        <img src='https://img.magnific.com/premium-vector/cool-cartoon-boy-avatar_987671-675.jpg?semt=ais_hybrid&w=740&q=80' alt='User-profile'/>
-                    </div>
-                </div>
-            
-            <div className='flex flex-col flex-1'> 
-                <div className='flex  gap-2 flex-1 text-gray-800'>
-                        <p>Yashas MERNstack</p>
-                </div>
-            </div>
-        </div>
-        <div className='divider my-0 py-0 h-1'></div>
+    <div className='overflow-auto'>
+        <Otheruser/>
+        <Otheruser/>
+        <Otheruser/>
+        <Otheruser/>
+        <Otheruser/>
+        <Otheruser/>
+        <Otheruser/>
+        <Otheruser/>
+        <Otheruser/>
     </div>
   )
 }
