@@ -1,6 +1,6 @@
 import './App.css'
 
-import { createBrowserRouter, RouterProvider} from 'react-router-dom';
+import { createBrowserRouter, Navigate, RouterProvider} from 'react-router-dom';
 import HomePage from './components/HomePage';
 import Signup from './components/signup';
 import Login from './components/Login';
@@ -41,6 +41,10 @@ function App() {
         dispatch(setAuthUser(res.data));
       }catch(error){
         console.log(error);
+
+        if(error.res?.status === 401){
+          Navigate('/login')
+        }
       }
     };
     fetchUser();
