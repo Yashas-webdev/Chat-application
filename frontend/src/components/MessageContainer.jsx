@@ -5,12 +5,12 @@ import { useSelector } from "react-redux";
 
 function MessageContainer(props) {
 
-  const { authUser } = useSelector((state) => state.user);
-
+  
+  const {selectedUser} = useSelector(store => store.user)
 
   const user = props.user;
   return (
-    <div className="md:min-w-[450px] flex flex-col p-1 ">
+    <div className="md:min-w-[450px] flex flex-col ">
       <div className="flex gap-3 items-center bg-zinc-800 text-amber-50 px-4 py-2 mb-2 border rounded border-zinc-700 ">
         <div className="avatar online">
           <div className="w-10 rounded-full">
@@ -22,12 +22,14 @@ function MessageContainer(props) {
         </div>
 
         <div className="flex flex-col flex-1">
-          <div className="flex  justify-between gap-2 flex-1 ">
-            <p>{authUser?.fullName}</p>
+          <div className="flex  justify-between gap-2 ">
+            <p>{selectedUser?.fullName}</p>
           </div>
         </div>
       </div>
-      <Messages/>
+      <div className="flex-1 overflow-hidden">
+      <Messages/>   
+      </div>
       <SendInput/>
     </div>
   );

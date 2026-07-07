@@ -25,9 +25,9 @@ app.use(cors(corsOption));
 
 
 app.use("/api/v1/user",userRoute)
-app.get("/",(req,res)=>{
-    res.send("Backend is running");
-})
+// app.get("/",(req,res)=>{
+//     res.send("Backend is running");
+// })
 app.use("/api/v1/message",messageRoute);
 
 const start = async () => {
