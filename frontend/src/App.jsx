@@ -36,7 +36,7 @@ function App() {
           }
         );
 
-        console.log("user from backend",res.data)
+        // console.log("user from backend",res.data)
        
         dispatch(setAuthUser(res.data));
       }catch(error){
