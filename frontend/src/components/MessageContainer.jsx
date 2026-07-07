@@ -27,9 +27,9 @@ function MessageContainer(props) {
           </div>
         </div>
       </div>
-      <div className="flex-1 overflow-hidden">
+      
       <Messages/>   
-      </div>
+      
       <SendInput/>
     </div>
   );
