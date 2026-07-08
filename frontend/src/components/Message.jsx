@@ -13,7 +13,7 @@ function Message({message}) {
     
 <div ref={scroll} className={`chat ${authUser?._id === message?.senderId ? 'chat-end' : 'chat-start'}`}>
   <div className="chat-image avatar">
-    <div className="w-10 rounded-full">
+    <div className="w-10  rounded-full">
       <img
         alt="Tailwind CSS chat bubble component"
         src={message.senderId === authUser?._id ? authUser?.profilePhoto : selectedUser?.profilePhoto}

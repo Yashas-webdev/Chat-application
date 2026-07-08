@@ -7,7 +7,6 @@ import { setMessages } from '../redux/messageSlice';
 function Messages() {
   useGetMessages();
   const {messages} = useSelector(store => store.message);
-  if(!messages) return;
   return (
     <div className='px-4 flex-1 overflow-auto'>
       {
