@@ -3,13 +3,14 @@ import { BiSearchAlt2 } from "react-icons/bi";
 import Otherusers from "./Otherusers";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
-import { setAuthUser } from "../redux/userSlice";
-import { useDispatch } from "react-redux";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { setAuthUser, setOtherUsers } from "../redux/userSlice";
+import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 
 function Sidebar() {
   const [search,setSearch] = useState('');
+  const {otherUsers} = useSelector(store=>store.user)
 
   const dispatch = useDispatch();
 
@@ -32,8 +33,15 @@ function Sidebar() {
     }
   };
 
-  const searchSubmitHandler = () => {
-    alert(search);
+  const searchSubmitHandler = (e) => {
+    e.preventDefault();
+    const conversationUser = otherUsers?.find((user)=>user.fullName.toLowerCase().includes(search.toLowerCase()));
+    
+    if(conversationUser){
+      dispatch(setOtherUsers([conversationUser]))
+    }else{
+      toast.error("User not found!")
+    }
   }
   
 
