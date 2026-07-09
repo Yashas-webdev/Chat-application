@@ -8,8 +8,12 @@ import { setAuthUser } from "../redux/userSlice";
 import { useDispatch } from "react-redux";
 
 function Sidebar() {
+  const [search,setSearch] = useState('');
+
   const dispatch = useDispatch();
+
   const navigate = useNavigate();
+
   const logoutHandler = async () => {
     try {
       const res = await axios.get(
@@ -27,14 +31,22 @@ function Sidebar() {
     }
   };
 
+  const searchSubmitHandler = () => {
+    alert(search)
+  }
+  
+
   return (
     <div className="border-r border-slate-400 p-4 flex flex-col ">
-      <form action="" className="flex items-center gap-2">
+      <form onSubmit={searchSubmitHandler} action="" className="flex items-center gap-2">
         <input
+          value={serach}
+          onChange={(e)=>setSearch(e.target.value)}
           className="input input-bordered rounded-md bg-white text-black placeholder:text-gray-500"
           type="text"
           placeholder="Search..."
         />
+
         <button
           type="submit"
           className="btn bg-zinc-700 hover:bg-zinc-500 text-white border-amber-50"
