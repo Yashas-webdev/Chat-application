@@ -7,9 +7,12 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { setAuthUser, setOtherUsers } from "../redux/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
+import useGetOtherUsers from '../hooks/useGetOtherUsers'
 
 function Sidebar() {
   const [search,setSearch] = useState('');
+
+  useGetOtherUsers();
   const {otherUsers} = useSelector(store=>store.user)
 
   const dispatch = useDispatch();
@@ -33,15 +36,12 @@ function Sidebar() {
     }
   };
 
+  const filteredUsers = search 
+    ? otherUsers?.filter(user => user.fullName.toLowerCase().includes(search.toLowerCase())
+  )   : otherUsers;
+
   const searchSubmitHandler = (e) => {
     e.preventDefault();
-    const conversationUser = otherUsers?.find((user)=>user.fullName.toLowerCase().includes(search.toLowerCase()));
-    
-    if(conversationUser){
-      dispatch(setOtherUsers([conversationUser]))
-    }else{
-      toast.error("User not found!")
-    }
   }
   
 
@@ -65,7 +65,7 @@ function Sidebar() {
       </form>
 
       <div className="divider px-3 "></div>
-      <Otherusers />
+      <Otherusers users={filteredUsers} />
       <div className="mt-2">
         <button
           onClick={logoutHandler}
