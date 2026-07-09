@@ -1,4 +1,4 @@
-import React from "react";
+import {React} from "react";
 import { BiSearchAlt2 } from "react-icons/bi";
 import Otherusers from "./Otherusers";
 import axios from "axios";
@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { setAuthUser } from "../redux/userSlice";
 import { useDispatch } from "react-redux";
+import { useState } from "react";
 
 function Sidebar() {
   const [search,setSearch] = useState('');
@@ -32,7 +33,7 @@ function Sidebar() {
   };
 
   const searchSubmitHandler = () => {
-    alert(search)
+    alert(search);
   }
   
 
@@ -40,7 +41,7 @@ function Sidebar() {
     <div className="border-r border-slate-400 p-4 flex flex-col ">
       <form onSubmit={searchSubmitHandler} action="" className="flex items-center gap-2">
         <input
-          value={serach}
+          value={search}
           onChange={(e)=>setSearch(e.target.value)}
           className="input input-bordered rounded-md bg-white text-black placeholder:text-gray-500"
           type="text"
