@@ -15,6 +15,29 @@ function Sidebar() {
   useGetOtherUsers();
   const {otherUsers} = useSelector(store=>store.user)
 
+  
+  const filteredUsers = search 
+    ? otherUsers?.filter(user => user.fullName.toLowerCase().includes(search.toLowerCase())
+  )   : otherUsers;
+
+  const searchSubmitHandler = (e) => {
+    e.preventDefault();
+  }
+
+//   const searchSubmitHandler = (e) => {
+//     e.preventDefault();
+
+//     const conversationUser = otherUsers?.find((user) =>
+//         user.fullName.toLowerCase().includes(search.toLowerCase())
+//     );
+
+//     if (conversationUser) {
+//         dispatch(setOtherUsers([conversationUser]));
+//     } else {
+//         toast.error("User not found!");
+//     }
+// };
+
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
@@ -36,13 +59,6 @@ function Sidebar() {
     }
   };
 
-  const filteredUsers = search 
-    ? otherUsers?.filter(user => user.fullName.toLowerCase().includes(search.toLowerCase())
-  )   : otherUsers;
-
-  const searchSubmitHandler = (e) => {
-    e.preventDefault();
-  }
   
 
   return (

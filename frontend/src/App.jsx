@@ -4,10 +4,11 @@ import { createBrowserRouter, Navigate, RouterProvider} from 'react-router-dom';
 import HomePage from './components/HomePage';
 import Signup from './components/signup';
 import Login from './components/Login';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { setAuthUser } from './redux/userSlice';
 import axios from 'axios';
+import io from 'socket.io-client'
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,9 @@ const router = createBrowserRouter([
   }
 ])
 function App() {
+  const [socket, setSocket] = useState(null);
+  const {authUser} = useSelector(store=>store.user);
+
 
   const dispatch = useDispatch();
 
@@ -50,6 +54,7 @@ function App() {
     fetchUser();
   },[])
 
+  
   return (
    <div className='p-4 h-screen flex itmes-center justify-center'>
     <RouterProvider router={router}/>
