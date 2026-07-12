@@ -26,8 +26,9 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  const [socket, setSocket] = useState(null);
+  
   const { authUser } = useSelector(store => store.user);
+  const dispatch = useDispatch();
 
   const dispatch = useDispatch();
 
