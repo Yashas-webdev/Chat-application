@@ -26,7 +26,7 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  
+
   const { authUser } = useSelector(store => store.user);
   const dispatch = useDispatch();
 
@@ -58,9 +58,18 @@ function App() {
 
   useEffect(() => {
     if (authUser) {
-      const newSocket = io("http://localhost:8080");
+      const newSocket = io("http://localhost:8080",{
+        query:{
+          userId:authUser._id
+        }
+      });
 
-      setSocket(newSocket);
+
+      dispatch(setSocket(newSocket));
+
+      Socket.on('getOnlineUsers',(onlineUsers)=>{
+        dispatch(setOnelineUsers(onlineUsers))
+      })
 
       return () => {
         newSocket.disconnect();
