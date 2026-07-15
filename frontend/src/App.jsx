@@ -10,6 +10,7 @@ import { setAuthUser, setOnlineUsers } from "./redux/userSlice";
 import { setSocket } from "./redux/socketSlice";
 import axios from "axios";
 import io from "socket.io-client";
+// import  from "./redux/store";
 
 const router = createBrowserRouter([
     {
@@ -28,6 +29,7 @@ const router = createBrowserRouter([
 
 function App() {
     const { authUser } = useSelector((store) => store.user);
+    const {newSocket} = useSelector((store)=>store.socket)
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -54,24 +56,30 @@ function App() {
     }, [dispatch]);
 
     useEffect(() => {
-        if (authUser) {
-            const newSocket = io("http://localhost:8080", {
-                query: {
-                    userId: authUser._id,
-                },
-            });
-
-            dispatch(setSocket(newSocket));
-
-            newSocket.on("getOnlineUsers", (onlineUsers) => {
-                dispatch(setOnlineUsers(onlineUsers));
-            });
-
-            return () => {
-                newSocket.disconnect();
-            };
+    if (!authUser) {
+        if (newSocket) {
+            newSocket.disconnect();
+            dispatch(setSocket(null));
         }
-    }, [authUser, dispatch]);
+        return;
+    }
+
+    const socket = io("http://localhost:8080", {
+        query: {
+            userId: authUser._id,
+        },
+    });
+
+    dispatch(setSocket(socket));
+
+    socket.on("getOnlineUsers", (onlineUsers) => {
+        dispatch(setOnlineUsers(onlineUsers));
+    });
+
+    return () => {
+        socket.disconnect();
+    };
+}, [authUser, newSocket, dispatch]);
 
     return (
         <div className="p-4 h-screen flex items-center justify-center">
