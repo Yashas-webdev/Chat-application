@@ -29,7 +29,7 @@ const router = createBrowserRouter([
 
 function App() {
     const { authUser } = useSelector((store) => store.user);
-    const {newSocket} = useSelector((store)=>store.socket)
+    // const {newSocket} = useSelector((store)=>store.socket)
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -55,31 +55,27 @@ function App() {
         fetchUser();
     }, [dispatch]);
 
+
     useEffect(() => {
-    if (!authUser) {
-        if (newSocket) {
-            newSocket.disconnect();
+    if (authUser) {
+        const socket = io("http://localhost:8080", {
+            query: {
+                userId: authUser._id,
+            },
+        });
+
+        dispatch(setSocket(socket));
+
+        socket.on("getOnlineUsers", (users) => {
+            dispatch(setOnlineUsers(users));
+        });
+
+        return () => {
+            socket.disconnect();
             dispatch(setSocket(null));
-        }
-        return;
+        };
     }
-
-    const socket = io("http://localhost:8080", {
-        query: {
-            userId: authUser._id,
-        },
-    });
-
-    dispatch(setSocket(socket));
-
-    socket.on("getOnlineUsers", (onlineUsers) => {
-        dispatch(setOnlineUsers(onlineUsers));
-    });
-
-    return () => {
-        socket.disconnect();
-    };
-}, [authUser, newSocket, dispatch]);
+}, [authUser, dispatch]);
 
     return (
         <div className="p-4 h-screen flex items-center justify-center">
