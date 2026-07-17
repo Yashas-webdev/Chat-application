@@ -3,8 +3,8 @@ import { BiSearchAlt2 } from "react-icons/bi";
 import Otherusers from "./Otherusers";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { useNavigate,  } from "react-router-dom";
-import { setAuthUser, } from "../redux/userSlice";
+import { useNavigate } from "react-router-dom";
+import { setAuthUser } from "../redux/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import useGetOtherUsers from '../hooks/useGetOtherUsers'
@@ -54,6 +54,7 @@ function Sidebar() {
       dispatch(setAuthUser(null));
       navigate("/login");
       toast.success(res.data.message);
+      dispatch(setAuthUser(null))
     } catch (error) {
       console.log(error);
     }
