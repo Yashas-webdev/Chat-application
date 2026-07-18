@@ -27,6 +27,8 @@ export const sendMessage = async(req,res)=>{
         };
         await gotConversation.save();
 
+         const receiversocketId = getReceiverSocketId(newMessage._id);
+
         return res.status(201).send({
             // message:"Message send successfully"
             newMessage
