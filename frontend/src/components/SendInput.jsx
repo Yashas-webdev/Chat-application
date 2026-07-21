@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import  { useState } from 'react'
 import { RiSendPlaneFill } from "react-icons/ri";
 import { useDispatch, useSelector } from 'react-redux';
-import { setSelectedUser } from '../redux/userSlice';
+// import { setSelectedUser } from '../redux/userSlice';
 import { setMessages } from '../redux/messageSlice';
 import axios from 'axios';
 
