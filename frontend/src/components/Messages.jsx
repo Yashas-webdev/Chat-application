@@ -1,8 +1,8 @@
-import React from 'react'
+// import React from 'react'
 import Message from './Message'
 import useGetMessages from '../hooks/useGetMessages'
 import { useSelector } from 'react-redux';
-import { setMessages } from '../redux/messageSlice';
+// import { setMessages } from '../redux/messageSlice';
 
 function Messages() {
   useGetMessages();

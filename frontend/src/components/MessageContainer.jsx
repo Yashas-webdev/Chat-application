@@ -1,19 +1,19 @@
-import React, { useEffect } from "react";
+import  { useEffect } from "react";
 import SendInput from "./SendInput";
 import Messages from "./Messages";
 import { useDispatch, useSelector } from "react-redux";
 import { setSelectedUser } from "../redux/userSlice";
 
-function MessageContainer(props) {
+function MessageContainer() {
   const { selectedUser, authUser } = useSelector((store) => store.user);
   const dispatch = useDispatch();
   useEffect(() => {
     return () => {
       dispatch(setSelectedUser(null));
     };
-  }, []);
+  }, [dispatch]);
 
-  const user = props.user;
+  // const user = props.user;
   return (
     <>
       {selectedUser !== null ? (

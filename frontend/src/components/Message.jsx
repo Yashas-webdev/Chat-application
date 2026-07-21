@@ -1,6 +1,6 @@
-import React, { useEffect,useRef } from 'react'
+import { useEffect,useRef } from 'react'
 import { useSelector } from 'react-redux';
-import { setAuthUser } from '../redux/userSlice';
+// import { setAuthUser } from '../redux/userSlice';
 
 function Message({message}) {
   const scroll = useRef();
