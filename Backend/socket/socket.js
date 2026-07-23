@@ -2,7 +2,7 @@ import { Server } from "socket.io";
 import http from "http";
 
 let io;
-const userSocketMap = {}; // Store online users
+
 
 const initializeSocket = (app) => {
     const server = http.createServer(app);
@@ -14,6 +14,13 @@ const initializeSocket = (app) => {
             credentials: true,
         },
     });
+
+    export const getReceiverSocketId = (receiverId) => {
+        return userSocketMap[receiverId]
+    }
+
+    const userSocketMap = {}; // Store online users
+
 
     io.on("connection", (socket) => {
         console.log("User connected:", socket.id);

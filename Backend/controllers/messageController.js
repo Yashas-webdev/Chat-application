@@ -27,6 +27,7 @@ export const sendMessage = async(req,res)=>{
         };
         await gotConversation.save();
 
+        //SOCKET IO
          const receiversocketId = getReceiverSocketId(receiverId);
          if(receiversocketId){
             io.to(receiversocketId).emit("newMessage",newMessage);
