@@ -3,6 +3,11 @@ import http from "http";
 
 let io;
 
+const userSocketMap = {};
+
+export const getReceiverSocketId = (receiverId) => {
+    return userSocketMap[receiverId];
+};
 
 const initializeSocket = (app) => {
     const server = http.createServer(app);
@@ -15,13 +20,6 @@ const initializeSocket = (app) => {
         },
     });
 
-    export const getReceiverSocketId = (receiverId) => {
-        return userSocketMap[receiverId]
-    }
-
-    const userSocketMap = {}; // Store online users
-
-
     io.on("connection", (socket) => {
         console.log("User connected:", socket.id);
 
@@ -31,7 +29,6 @@ const initializeSocket = (app) => {
             userSocketMap[userId] = socket.id;
         }
 
-        // Send updated online users
         io.emit("getOnlineUsers", Object.keys(userSocketMap));
 
         socket.on("disconnect", () => {
