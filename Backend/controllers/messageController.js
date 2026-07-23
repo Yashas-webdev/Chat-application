@@ -27,7 +27,10 @@ export const sendMessage = async(req,res)=>{
         };
         await gotConversation.save();
 
-         const receiversocketId = getReceiverSocketId(newMessage._id);
+         const receiversocketId = getReceiverSocketId(receiverId);
+         if(receiversocketId){
+            io.to(receiversocketId).emit("newMessage",newMessage);
+         }//sending the messasge to the single user, one way communication
 
         return res.status(201).send({
             // message:"Message send successfully"
