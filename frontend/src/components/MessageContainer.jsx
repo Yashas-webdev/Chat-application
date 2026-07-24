@@ -18,7 +18,7 @@ function MessageContainer() {
     <>
       {selectedUser !== null ? (
         <div className="md:min-w-[450px] flex flex-col ">
-          <div className="flex gap-3 items-center bg-zinc-800 text-amber-50 px-4 py-2 mb-2 border rounded border-zinc-700 ">
+          <div className="flex gap-3 items-center bg-zinc-700 text-amber-50 px-4 py-2 mb-2 border rounded border-zinc-700 ">
             <div className="avatar online">
               <div className="w-10 rounded-full">
                 <img
