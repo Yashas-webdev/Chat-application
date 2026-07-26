@@ -26,7 +26,11 @@ export const sendMessage = async(req,res)=>{
         if(newMessage){
             gotConversation.messages.push(newMessage._id);
         };
-        await gotConversation.save();
+        // await gotConversation.save();
+        // await newMessage.save()
+
+        await Promise.all(gotConversation.save(),newMessage.save());  //becuase as the new message started with the new user to save it.
+        
 
         //SOCKET IO
          const receiversocketId = getReceiverSocketId(receiverId);

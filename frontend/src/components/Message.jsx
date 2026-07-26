@@ -23,10 +23,7 @@ function Message({message}) {
   <div className="chat-header">
     <time className="text-xs opacity-50 text-gray-900">12:45</time>
   </div>
-  <div className="chat-bubble  bg-white/10
-                backdrop-blur-md
-                border border-white/20
-                shadow-md">{message?.message}</div>
+<div className={`chat-bubble ${authUser?._id === message?.senderId ? 'bg-gray-200 text-black' : 'chat-start'} `}>{message?.message}</div>
 </div>
 
 
