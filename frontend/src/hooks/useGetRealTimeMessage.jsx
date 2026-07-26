@@ -4,14 +4,14 @@ import { setMessages } from '../redux/messageSlice';
 
 const useGetRealTimeMessage = () => {
     const { socket } = useSelector(store => store.socket);
-    const { messages } = useSelector(store => store.message); // ✅ fixed
+    const { messages } = useSelector(store => store.message); // fixed
     const dispatch = useDispatch();
 
     useEffect(() => {
         if(!socket) return; // safety check
 
         socket.on("newMessage", (newMessage) => {
-            dispatch(setMessages([...messages, newMessage])) // ✅ fixed
+            dispatch(setMessages([...messages, newMessage])) //fixed
         });
 
         return () => socket.off("newMessage"); //  cleanup
