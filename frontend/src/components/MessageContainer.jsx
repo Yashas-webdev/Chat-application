@@ -22,8 +22,8 @@ function MessageContainer() {
             <div className="avatar online">
               <div className="w-10 rounded-full">
                 <img
-                  src="https://img.magnific.com/premium-vector/cool-cartoon-boy-avatar_987671-675.jpg?semt=ais_hybrid&w=740&q=80"
-                  alt="User-profile"
+                  src={selectedUser?.profilePhoto}
+                  alt={selectedUser?.fullName}
                 />
               </div>
             </div>
