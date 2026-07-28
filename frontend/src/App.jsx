@@ -10,20 +10,28 @@ import { setAuthUser, setOnlineUsers } from "./redux/userSlice";
 import { setSocket } from "./redux/socketSlice";
 import axios from "axios";
 import io from "socket.io-client";
+import ProtectedRoute from "./components/ProtectedRoute";
+import PublicRoute from "./components/PublicRoute";
 // import  from "./redux/store";
 
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <HomePage />,
+        element:<ProtectedRoute>
+               <HomePage />
+               </ProtectedRoute> ,
     },
     {
         path: "/signup",
-        element: <Signup />,
+        element:<PublicRoute>
+            <Signup />
+               </PublicRoute> ,
     },
     {
         path: "/login",
-        element: <Login />,
+        element:<PublicRoute>
+            <Login />
+              </PublicRoute> ,
     },
 ]);
 
