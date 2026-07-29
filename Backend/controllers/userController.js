@@ -1,5 +1,5 @@
 import User from "../models/userModel.js";
-import bcrypt from "bcryptjs";
+import bcrypt, { truncates } from "bcryptjs";
 import jwt from "jsonwebtoken"
 
 export const register = async(req,res)=>{
@@ -77,7 +77,7 @@ export const login = async(req,res)=>{
 
         const token = await jwt.sign(tokenData, process.env.JWT_SECRET_KEY, {expiresIn:'1d'});
 
-        return res.status(200).cookie("token",token, {maxAge:1*24*60*60*1000, httpOnly:true, sameSite:'none'}).send({
+        return res.status(200).cookie("token",token, {maxAge:1*24*60*60*1000, httpOnly:true, sameSite:'none',secure:truncates}).send({
             _id:user._id,
             username: user.username,
             fullName: user.fullName,
@@ -91,7 +91,7 @@ export const login = async(req,res)=>{
 
 export const logout = (req,res)=>{
     try{
-        return res.status(200).cookie('token',"",{maxAge:0}).send({   //we can also use clearCookie('token').send
+        return res.status(200).cookie('token',"",{maxAge:0,httpOnly:true,secure:true,sameSite:'none'},).send({   //we can also use clearCookie('token').send
             message:"logged out successfully."
         })
     }catch(error){
