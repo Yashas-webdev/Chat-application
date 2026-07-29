@@ -47,6 +47,7 @@ export const register = async(req,res)=>{
 
 
 export const login = async(req,res)=>{
+    console.log("Request body:", req.body);
     try{
        
         const {username, password} = req.body || {};

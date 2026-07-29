@@ -16,6 +16,9 @@ const Login = () => {
     const onSubmitHandler = async(e) =>{
       e.preventDefault();
       try{
+
+        console.log("User:",user);
+        
       const res = await axios.post(`https://chatcom-dpzk.onrender.com/api/v1/user/login`,user,{
         headers: {
           'Content-Type': 'application/json'
