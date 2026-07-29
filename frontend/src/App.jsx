@@ -5,7 +5,7 @@ import HomePage from "./components/HomePage";
 import Signup from "./components/signup";
 import Login from "./components/Login";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect,useState } from "react";
 import { setAuthUser, setOnlineUsers } from "./redux/userSlice";
 import { setSocket } from "./redux/socketSlice";
 import axios from "axios";
@@ -40,6 +40,8 @@ function App() {
     // const {newSocket} = useSelector((store)=>store.socket)
     const dispatch = useDispatch();
 
+    const [loading, setLoading] = useState(true);
+
     useEffect(() => {
         const fetchUser = async () => {
             try {
@@ -57,6 +59,8 @@ function App() {
                 if (error.response?.status === 401) {
                     dispatch(setAuthUser(null));
                 }
+            }finally{
+                setLoading(false);
             }
         };
 
@@ -84,6 +88,14 @@ function App() {
         };
     }
 }, [authUser, dispatch]);
+
+if(loading){
+    return(
+        <div className="h-screen flex items-center justify-center">
+            Loading...
+        </div>
+    )
+}
 
     return (
         <div className="p-4 h-screen flex items-center justify-center">
