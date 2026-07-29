@@ -2,7 +2,7 @@ import "./App.css";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomePage from "./components/HomePage";
-import Signup from "./components/signup";
+import Signup from "./components/Signup";
 import Login from "./components/Login";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect,useState } from "react";
