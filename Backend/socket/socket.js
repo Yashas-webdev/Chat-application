@@ -14,7 +14,7 @@ const initializeSocket = (app) => {
 
     io = new Server(server, {
         cors: {
-            origin: true,
+            origin: "https://chatcom-wheat.vercel.app",
             methods: ["GET", "POST"],
             credentials: true,
         },
