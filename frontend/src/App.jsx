@@ -46,7 +46,7 @@ function App() {
         const fetchUser = async () => {
             try {
                 const res = await axios.get(
-                    "http://localhost:8080/api/v1/user/me",
+                    "https://chatcom-dpzk.onrender.com/api/v1/user/me",
                     {
                         withCredentials: true,
                     }
@@ -70,7 +70,7 @@ function App() {
 
     useEffect(() => {
     if (authUser) {
-        const socket = io("http://localhost:8080", {
+        const socket = io("https://chatcom-dpzk.onrender.com", {
             query: {
                 userId: authUser._id,
             },
