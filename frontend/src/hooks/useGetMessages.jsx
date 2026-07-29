@@ -11,7 +11,7 @@ const useGetMessages =  () =>{
              if (!selectedUser?._id) return;
             try{
                 axios.defaults.withCredentials = true;
-                const res = await axios.get(`http://localhost:8080/api/v1/message/${selectedUser?._id}`);
+                const res = await axios.get(`https://chatcom-dpzk.onrender.com/api/v1/message/${selectedUser?._id}`);
                 console.log("Message",res.data);
                 dispatch(setMessages(res.data))
                 //store
