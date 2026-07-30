@@ -3,9 +3,10 @@ import jwt from "jsonwebtoken";
 const isAuthenticated = async(req, res, next)=>{
     try{
 
+       console.log("========================");
         console.log("Headers Cookie:", req.headers.cookie);
-        console.log("Parsed Cookies",req.cookies);
-        
+        console.log("Parsed Cookies:", req.cookies);
+
         const token = req.cookies.token;
         if(!token){
             return res.status(401).send({
