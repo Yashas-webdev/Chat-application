@@ -26,6 +26,7 @@ const corsOption={
     ],
     credentials:true,
 };
+console.log("✅ NEW DEPLOY - CORS:", corsOption.origin);console.log("✅ NEW DEPLOY - CORS:", corsOption.origin);
 app.use(cors(corsOption));
 
 
